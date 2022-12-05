@@ -1,5 +1,6 @@
 {
 	"name": "react-calendar",
+	"homepage": "https://seregskupow.github.io/react-calendar",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
