@@ -12,13 +12,17 @@
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.1",
+		"dayjs": "^1.11.7",
+		"lodash": "^4.17.21",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"styled-components": "^5.3.6"
 	},
 	"devDependencies": {
+		"@types/lodash": "^4.14.191",
 		"@types/react": "^18.0.24",
 		"@types/react-dom": "^18.0.8",
+		"@types/styled-components": "^5.1.26",
 		"@vitejs/plugin-react": "^2.2.0",
 		"typescript": "^4.6.4",
 		"vite": "^3.2.3"
