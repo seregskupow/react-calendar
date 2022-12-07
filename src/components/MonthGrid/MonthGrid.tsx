@@ -1,21 +1,21 @@
 import _ from 'lodash';
 import { FC, Fragment } from 'react';
-import { Day } from '../../models';
 import DayCell from '../DayCell/DayCell';
 import { Grid, MonthWrapper } from './MonthGrid.styled';
+import { Day } from '@/models';
+import { useActions, useAppSelector, calendarSelector } from '@/store';
 
-interface MonthGridProps {
-	month: Day[][];
-	incrementMonth: () => void;
-	decrementMonth: () => void;
-}
+interface MonthGridProps {}
 
-const MonthGrid: FC<MonthGridProps> = ({ month, incrementMonth, decrementMonth }) => {
+const MonthGrid: FC = () => {
+	const { nextMonth, prevMonth } = useActions();
+	const { month } = useAppSelector(calendarSelector);
+
 	const onWheelHandler = _.debounce((e: any) => {
 		if (e.deltaY < 0) {
-			decrementMonth();
+			prevMonth();
 		} else {
-			incrementMonth();
+			nextMonth();
 		}
 	}, 250);
 
