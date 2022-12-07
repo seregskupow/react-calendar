@@ -7,6 +7,6 @@ export default defineConfig({
 	plugins: [react()],
 	base: process.env.NODE_ENV === 'production' ? '/react-calendar/' : '/',
 	resolve: {
-		alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
+		alias: [{ find: '@', replacement: path.resolve(__dirname, './src') }],
 	},
 });
