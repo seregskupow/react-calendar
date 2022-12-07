@@ -13,6 +13,15 @@ const GlobalStyles = createGlobalStyle`
 		font-family: 'Roboto', sans-serif;
 		background-color: ${(props) => props.theme.bg} ;
 	}
+
+	ul, li {
+		list-style: none;
+	}
+
+	button {
+		background: none;
+		border: none;
+	}
 `;
 
 export default GlobalStyles;

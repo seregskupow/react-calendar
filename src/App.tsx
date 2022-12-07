@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { getMonth } from './utils/date';
 import MonthGrid from './components/MonthGrid/MonthGrid';
 import Header from './components/Header/Header';
+import Sidebar from './components/Sidebar/Sidebar';
 
 const App: FC = () => {
 	const [month, setMonth] = useState(() => getMonth());
@@ -28,13 +29,14 @@ const App: FC = () => {
 					incrementMonth={() => setMonthIndex(monthIndex + 1)}
 					monthIndex={monthIndex}
 				/>
-				<div style={{ display: 'flex', flex: '1 1 0%' }}>
+				<Body>
+					<Sidebar />
 					<MonthGrid
 						decrementMonth={() => setMonthIndex(monthIndex - 1)}
 						incrementMonth={() => setMonthIndex(monthIndex + 1)}
 						month={month}
 					/>
-				</div>
+				</Body>
 			</MainContainer>
 		</React.Fragment>
 	);
@@ -47,4 +49,10 @@ const MainContainer = styled.div`
 	flex-direction: column;
 
 	height: 100vh;
+`;
+
+const Body = styled.div`
+	display: grid;
+	grid-template-columns: 10% auto;
+	height: calc(100vh - ${(props) => props.theme.layout.headerHeight});
 `;

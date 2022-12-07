@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { FC, Fragment } from 'react';
 import { Day } from '../../models';
 import DayCell from '../DayCell/DayCell';
-import { Grid } from './MonthGrid.styled';
+import { Grid, MonthWrapper } from './MonthGrid.styled';
 
 interface MonthGridProps {
 	month: Day[][];
@@ -20,15 +20,17 @@ const MonthGrid: FC<MonthGridProps> = ({ month, incrementMonth, decrementMonth }
 	}, 250);
 
 	return (
-		<Grid onWheel={(e) => onWheelHandler(e)}>
-			{month.map((week: Day[], weekIdx: number) => (
-				<Fragment key={_.uniqueId()}>
-					{week.map((day: Day) => (
-						<DayCell day={day} weekIndex={weekIdx} key={_.uniqueId()} />
-					))}
-				</Fragment>
-			))}
-		</Grid>
+		<MonthWrapper>
+			<Grid onWheel={(e) => onWheelHandler(e)}>
+				{month.map((week: Day[], weekIdx: number) => (
+					<Fragment key={_.uniqueId()}>
+						{week.map((day: Day) => (
+							<DayCell day={day} weekIndex={weekIdx} key={_.uniqueId()} />
+						))}
+					</Fragment>
+				))}
+			</Grid>
+		</MonthWrapper>
 	);
 };
 
