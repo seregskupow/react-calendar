@@ -10,20 +10,15 @@
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,
 		"module": "ESNext",
-		"moduleResolution": "node",
+		"moduleResolution": "Node",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react-jsx"
 	},
-	"baseUrl": ".",
 	"paths": {
 		"@/*": ["./src/*"],
 	},
-	"include": ["src/**/*.ts","src/**/*.tsx", "**/*.ts",
-	"**/*.tsx"],
-
-	"exclude": [
-    "node_modules"
-  ]
+	"include": ["src"],
+	"references": [{ "path": "./tsconfig.node.json" }]
 }
