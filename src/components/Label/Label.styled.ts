@@ -1,18 +1,27 @@
-import styled, { css } from 'styled-components';
-import { LabelColor } from '../../models/theme';
-import { theme } from '../../styles/theme';
+import { LabelColor } from '@/models';
+import chroma from 'chroma-js';
+import styled from 'styled-components';
 
 interface LabelProps {
-	color?: LabelColor;
+	color: LabelColor;
+	fontSize?: number;
 }
+/**
+ * @param color LabelColor
+ * @param fontSize number (rem)
+ */
+export const LabelElement = styled.div<LabelProps>`
+	position: relative;
 
-export const LabelWrapper = styled.li<LabelProps>`
-	background-color: ${(props) => props.color || props.theme.colors.blue};
-	color: #fff;
+	padding: 0.2rem 0.5rem;
 
-	font-size: 2rem;
+	background-color: ${(props) =>
+		props.theme.colors[props.color] && chroma(`${props.theme.colors[props.color]}`).alpha(0.1).css()};
 
-	padding: 0.5rem 1rem;
-
+	border: 1px solid ${(props) => props.theme.colors[props.color]};
 	border-radius: 5px;
+
+	color: ${(props) => props.theme.colors[props.color]};
+
+	font-size: ${(props) => (props.fontSize ? `${props.fontSize}rem` : '1rem')};
 `;

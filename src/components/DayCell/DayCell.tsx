@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import _ from 'lodash';
-import { FC, WheelEvent } from 'react';
+import { FC, useEffect, useLayoutEffect, useRef, useState, WheelEvent } from 'react';
 
 import {
 	AddTaskButton,
@@ -24,21 +24,26 @@ interface DayCelProps {
 
 const DayCell: FC<DayCelProps> = ({ day, weekIndex }) => {
 	const tasks = useAppSelector((state) => selectTodosForDay(state, day.date));
-	const { show, selectDay } = useActions();
+	const { show, selectDay, deselectTask } = useActions();
+
+	const [overflowing, setOverflowing] = useState(false);
+	const tasksContainerRef = useRef<HTMLUListElement>(null);
+
+	useLayoutEffect(() => {
+		if (tasksContainerRef.current) {
+			const container = tasksContainerRef.current;
+			setOverflowing(container!.scrollHeight > container!.clientHeight);
+		}
+	}, []);
 
 	const createTaskHandler = () => {
 		selectDay(day.date);
-		show();
-	};
-
-	const tasksOnWheelHandler = (e: WheelEvent) => {
-		const container = (e.target as HTMLInputElement)!.closest('ul');
-		if (!container) return;
-		container!.scrollHeight > container!.clientHeight && e.stopPropagation();
+		deselectTask();
+		show('create');
 	};
 
 	return (
-		<DayContainer key={_.uniqueId()}>
+		<DayContainer $overflow={overflowing} key={_.uniqueId()}>
 			<CellHeader>
 				<AddTaskButton onClick={createTaskHandler}>
 					<HiPlus />
@@ -53,10 +58,10 @@ const DayCell: FC<DayCelProps> = ({ day, weekIndex }) => {
 				<DayNumber
 					currentMonth={day.currentMonth}
 					today={dayjs(day.date).format('DD-MM-YY') === dayjs().format('DD-MM-YY')}>
-					{dayjs(day.date).format('DD')}
+					{dayjs(day.date).format('D')}
 				</DayNumber>
 			</CellHeader>
-			<TasksContainer onWheel={tasksOnWheelHandler}>
+			<TasksContainer ref={tasksContainerRef} onWheel={(e) => overflowing && e.stopPropagation()}>
 				{tasks.map((task) => (
 					<Task task={task} key={_.uniqueId()} />
 				))}

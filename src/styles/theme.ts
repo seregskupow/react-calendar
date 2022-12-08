@@ -8,6 +8,8 @@ export const theme = {
 		green: '#06d6a0',
 		yellow: '#ffd166',
 		red: '#ef476f',
+		lightGray: '#dee2e6',
+		darkGray: '#94989b',
 	},
 	shadows: {
 		sh1: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',

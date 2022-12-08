@@ -25,6 +25,7 @@ const GlobalStyles = createGlobalStyle`
 	}
 	input, textarea {
 		outline:none;
+		font-family: 'Roboto', sans-serif;
 	}
 
 	/* width */

@@ -1,7 +1,9 @@
 import dayjs from 'dayjs';
 import { FC } from 'react';
-import { Button, HeaderContainer, YearLabel } from './Header.styled';
+import { Button } from '@/components/UI/Button.styled';
+import { HeaderContainer, YearLabel } from './Header.styled';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+
 import { BsArrowCounterclockwise } from 'react-icons/bs';
 import { calendarSelector, useActions, useAppSelector } from '@/store';
 
