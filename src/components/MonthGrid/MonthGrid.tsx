@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { FC, Fragment } from 'react';
-import DayCell from '../DayCell/DayCell';
+import DayCell from '@/components/DayCell/DayCell';
 import { Grid, MonthWrapper } from './MonthGrid.styled';
 import { Day } from '@/models';
 import { useActions, useAppSelector, calendarSelector } from '@/store';

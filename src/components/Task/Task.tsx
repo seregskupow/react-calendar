@@ -1,22 +1,23 @@
+import { Task } from '@/models';
+import _ from 'lodash';
 import { FC } from 'react';
 import { LabelCircle, LabelsContainer, TaskLabel, TaskWrapper } from './Task.styled';
 
 interface TaskProps {
-	label: string;
+	task: Task;
 }
 
-const Task: FC<TaskProps> = ({ label }) => {
+const TaskComponent: FC<TaskProps> = ({ task }) => {
 	return (
 		<TaskWrapper>
-			<TaskLabel>{label}</TaskLabel>
+			<TaskLabel>{task.title}</TaskLabel>
 			<LabelsContainer>
-				<LabelCircle color="blue" label="lorem" />
-				<LabelCircle color="green" label="lorem" />
-				<LabelCircle color="red" label="lorem" />
-				<LabelCircle color="yellow" label="lorem" />
+				{task.labels?.map((label) => (
+					<LabelCircle key={_.uniqueId()} color={label.color} label={label.title} />
+				))}
 			</LabelsContainer>
 		</TaskWrapper>
 	);
 };
 
-export default Task;
+export default TaskComponent;

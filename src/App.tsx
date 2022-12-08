@@ -1,14 +1,18 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-
 import _ from 'lodash';
-import MonthGrid from './components/MonthGrid/MonthGrid';
-import Header from './components/Header/Header';
-import Sidebar from './components/Sidebar/Sidebar';
+import Header from '@/components/Header/Header';
+import MonthGrid from '@/components/MonthGrid/MonthGrid';
+import Sidebar from '@/components/Sidebar/Sidebar';
+import { useAppSelector } from '@/store';
+import { modalSelector } from '@/store/slices/modal.slice';
+import TaskModal from './components/TaskModal/TaskModal';
 
 const App: FC = () => {
+	const { show } = useAppSelector(modalSelector);
 	return (
 		<React.Fragment>
+			{show && <TaskModal />}
 			<MainContainer>
 				<Header />
 				<Body>

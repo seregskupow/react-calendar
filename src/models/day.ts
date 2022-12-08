@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
 
 export interface Day {
-	date: Dayjs;
+	date: Date;
 	currentMonth: boolean;
 }

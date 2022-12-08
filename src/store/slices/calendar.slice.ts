@@ -8,11 +8,13 @@ import dayjs from 'dayjs';
 interface CalendarState {
 	month: Day[][];
 	monthIndex: number;
+	selectedDay: Date | null;
 }
 
 const initialState: CalendarState = {
 	month: getMonth(),
 	monthIndex: new Date().getMonth(),
+	selectedDay: null,
 };
 
 export const calendarSlice = createSlice({
@@ -31,13 +33,14 @@ export const calendarSlice = createSlice({
 			state.monthIndex = dayjs().month();
 			state.month = getMonth(state.monthIndex);
 		},
+		selectDay: (state, action: PayloadAction<Date>) => {
+			state.selectedDay = action.payload;
+		},
 	},
 });
 
 export const { nextMonth, prevMonth } = calendarSlice.actions;
 export const calendarActions = calendarSlice.actions;
-
-// Other code such as selectors can use the imported `RootState` type
 export const calendarSelector = (state: RootState) => state.calendar;
 
 export default calendarSlice.reducer;

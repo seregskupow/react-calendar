@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Label from '../Label/Label';
+import Label from '@/components/Label/Label';
 import { SidebarWrapper, LabelsContainer } from './Sidebar.styled';
 
 const Sidebar = () => {
