@@ -50,7 +50,7 @@ export const ModalForm = styled.form`
 	z-index: 11;
 `;
 
-const sharedInputStyle = ({ theme }) => css`
+const sharedInputStyle = (props: any) => css`
 	width: 100%;
 	font-size: 2rem;
 
@@ -63,7 +63,7 @@ const sharedInputStyle = ({ theme }) => css`
 	transition: all 0.3s ease;
 
 	&:focus {
-		border-color: ${theme.colors.blue};
+		border-color: ${props.theme.colors.blue};
 		box-shadow: 0 0 1px 4px #4362ee63;
 	}
 `;
