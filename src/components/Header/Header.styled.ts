@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header`
 	justify-content: center;
 	align-items: center;
 
-	padding: 2rem 4rem;
+	height: 10vh;
 
 	border-bottom: 1px solid ${(props) => props.theme.colors.blue};
 `;

@@ -1,40 +1,24 @@
-import dayjs from 'dayjs';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
-
 import _ from 'lodash';
-import { getMonth } from './utils/date';
-import MonthGrid from './components/MonthGrid/MonthGrid';
-import Header from './components/Header/Header';
+import Header from '@/components/Header/Header';
+import MonthGrid from '@/components/MonthGrid/MonthGrid';
+import Sidebar from '@/components/Sidebar/Sidebar';
+import { useAppSelector } from '@/store';
+import { modalSelector } from '@/store/slices/modal.slice';
+import TaskModal from './components/TaskModal/TaskModal';
 
 const App: FC = () => {
-	const [month, setMonth] = useState(() => getMonth());
-	const [monthIndex, setMonthIndex] = useState(() => new Date().getMonth());
-
-	const setCurrentMonth = () => {
-		setMonthIndex(dayjs().month());
-	};
-
-	useEffect(() => {
-		setMonth(getMonth(monthIndex));
-	}, [monthIndex]);
-
+	const { show } = useAppSelector(modalSelector);
 	return (
 		<React.Fragment>
+			{show && <TaskModal />}
 			<MainContainer>
-				<Header
-					setCurrentMonth={setCurrentMonth}
-					decrementMonth={() => setMonthIndex(monthIndex - 1)}
-					incrementMonth={() => setMonthIndex(monthIndex + 1)}
-					monthIndex={monthIndex}
-				/>
-				<div style={{ display: 'flex', flex: '1 1 0%' }}>
-					<MonthGrid
-						decrementMonth={() => setMonthIndex(monthIndex - 1)}
-						incrementMonth={() => setMonthIndex(monthIndex + 1)}
-						month={month}
-					/>
-				</div>
+				<Header />
+				<Body>
+					<Sidebar />
+					<MonthGrid />
+				</Body>
 			</MainContainer>
 		</React.Fragment>
 	);
@@ -47,4 +31,10 @@ const MainContainer = styled.div`
 	flex-direction: column;
 
 	height: 100vh;
+`;
+
+const Body = styled.div`
+	display: grid;
+	grid-template-columns: 10% auto;
+	height: calc(100vh - ${(props) => props.theme.layout.headerHeight});
 `;
