@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FC, Fragment } from 'react';
+import { FC, Fragment, WheelEvent } from 'react';
 import DayCell from '@/components/DayCell/DayCell';
 import { Grid, MonthWrapper } from './MonthGrid.styled';
 import { Day } from '@/models';
@@ -11,7 +11,10 @@ const MonthGrid: FC = () => {
 	const { nextMonth, prevMonth } = useActions();
 	const { month } = useAppSelector(calendarSelector);
 
-	const onWheelHandler = _.debounce((e: any) => {
+	const onWheelHandler = _.debounce((e: WheelEvent) => {
+		//prevent month change on window scale change
+		if (e.ctrlKey) return;
+
 		if (e.deltaY < 0) {
 			prevMonth();
 		} else {

@@ -4,24 +4,46 @@ import { RootState } from '..';
 import { CreateTask, EditTask, Task } from '@/models/task';
 import _ from 'lodash';
 import dayjs from 'dayjs';
+import { modalActions } from './modal.slice';
 
 const TASKS = 'tasks';
+const SELECTED_TASK = 'selected_task';
 
 interface TaskState {
 	tasks: Task[];
+	selectedTask: Task | null;
 }
 
 const retrieveTasksFromLocalStorage = (): Task[] => {
-	let data = JSON.parse(localStorage.getItem('tasks') || '[]');
-	return data as Task[];
+	try {
+		let data = JSON.parse(localStorage.getItem(TASKS) || '[]');
+
+		return data as Task[];
+	} catch (e) {
+		return [];
+	}
 };
 
-const saveToLocalStorage = (tasks: Task[]) => {
-	localStorage.setItem(TASKS, JSON.stringify(tasks));
+const retrieveselectedTaskFromLocalStorage = (): string => {
+	try {
+		let data = JSON.parse(localStorage.getItem(SELECTED_TASK) || '{}');
+		return data;
+	} catch (e) {
+		return '';
+	}
 };
+
+const saveToLocalStorage = (key: string, value: any) => {
+	localStorage.setItem(key, JSON.stringify(value));
+};
+
+const tasks = retrieveTasksFromLocalStorage();
+const savedId = retrieveselectedTaskFromLocalStorage();
+const selectedTask = tasks.find((task) => task.id === savedId) || null;
 
 const initialState: TaskState = {
-	tasks: retrieveTasksFromLocalStorage(),
+	tasks: tasks,
+	selectedTask: selectedTask,
 };
 
 export const tasksSlice = createSlice({
@@ -31,22 +53,50 @@ export const tasksSlice = createSlice({
 		addTask: (state, action: PayloadAction<CreateTask>) => {
 			const newTask = { ...action.payload, id: _.uniqueId() };
 			state.tasks = [...state.tasks, newTask];
-			saveToLocalStorage(state.tasks);
+			state.selectedTask = newTask;
+			saveToLocalStorage(TASKS, state.tasks);
+			saveToLocalStorage(SELECTED_TASK, state.selectedTask.id);
 		},
+
+		selectTask: (state, action: PayloadAction<string>) => {
+			const taskToSelect = state.tasks.find((task) => task.id === action.payload);
+
+			if (!taskToSelect) throw new Error('Wrong task id');
+
+			state.selectedTask = taskToSelect;
+			saveToLocalStorage(SELECTED_TASK, state.selectedTask.id);
+		},
+		deselectTask: (state) => {
+			state.selectedTask = null;
+		},
+
 		deleteTask: (state, action: PayloadAction<string>) => {
 			state.tasks = state.tasks.filter((task) => task.id !== action.payload);
-			saveToLocalStorage(state.tasks);
+			state.selectedTask = null;
+
+			saveToLocalStorage(TASKS, state.tasks);
 		},
+
 		editTask: (state, action: PayloadAction<EditTask>) => {
 			state.tasks = state.tasks.map((task) => {
 				if (task.id === action.payload.id) {
-					return { ...task, ...action.payload };
+					const editedTask = { ...task, ...action.payload };
+					state.selectedTask = editedTask;
+
+					return editedTask;
 				}
 				return task;
 			});
-			saveToLocalStorage(state.tasks);
+
+			saveToLocalStorage(TASKS, state.tasks);
+			saveToLocalStorage(SELECTED_TASK, action.payload.id);
 		},
 	},
+	// extraReducers: (builder) => {
+	// 	builder.addCase(modalActions.hide, (state) => {
+	// 		state.selectedTask = null;
+	// 	});
+	// },
 });
 
 export const tasksActions = tasksSlice.actions;

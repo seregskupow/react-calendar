@@ -1,7 +1,7 @@
-import { LabelColor } from "./theme";
+import { LabelColor } from './theme';
 
 export interface Label {
-	id: number;
+	id: string;
 	title: string;
 	color: LabelColor;
 }

@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 
-export const DayContainer = styled.div`
+interface DayContainerProps {
+	$overflow: boolean;
+}
+
+export const DayContainer = styled.div<DayContainerProps>`
 	position: relative;
 
 	display: flex;
@@ -18,6 +22,8 @@ export const DayContainer = styled.div`
 	}
 
 	&::before {
+		display: ${(props) => (props.$overflow ? 'block' : 'none')};
+
 		content: '';
 		position: absolute;
 		top: 0;
@@ -81,12 +87,12 @@ const HeaderButton = styled.button`
 
 export const DayEventsButton = styled(HeaderButton)`
 	right: 0.5rem;
-	top: 0.5rem;
+	top: 0.8rem;
 `;
 
 export const AddTaskButton = styled(HeaderButton)`
 	left: 0.5rem;
-	top: 0.5rem;
+	top: 0.8rem;
 
 	display: flex;
 	align-items: center;

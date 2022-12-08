@@ -1,19 +1,27 @@
 import { Task } from '@/models';
+import { useActions } from '@/store';
 import _ from 'lodash';
 import { FC } from 'react';
-import { LabelCircle, LabelsContainer, TaskLabel, TaskWrapper } from './Task.styled';
+import Label from '../Label/Label';
+import { LabelsContainer, TaskTitle, TaskWrapper } from './Task.styled';
 
 interface TaskProps {
 	task: Task;
 }
 
 const TaskComponent: FC<TaskProps> = ({ task }) => {
+	const { selectTask } = useActions();
+
+	const openEditModal = () => {
+		selectTask(task.id);
+	};
+
 	return (
-		<TaskWrapper>
-			<TaskLabel>{task.title}</TaskLabel>
+		<TaskWrapper onClick={openEditModal}>
+			<TaskTitle>{task.title}</TaskTitle>
 			<LabelsContainer>
 				{task.labels?.map((label) => (
-					<LabelCircle key={_.uniqueId()} color={label.color} label={label.title} />
+					<Label key={_.uniqueId()} color={label.color} title={label.title} />
 				))}
 			</LabelsContainer>
 		</TaskWrapper>

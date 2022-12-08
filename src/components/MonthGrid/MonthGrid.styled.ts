@@ -13,6 +13,6 @@ export const Grid = styled.div`
 	grid-template-rows: repeat(5, minmax(0, 1fr));
 	grid-template-columns: repeat(7, minmax(0, 1fr));
 
-	min-width: 1800px;
-	min-height: 1000px;
+	min-width: 1575px;
+	min-height: 800px;
 `;
