@@ -39,6 +39,7 @@ const TaskModal = () => {
 				description: description,
 				title: title,
 				date: selectedDay.valueOf(),
+				labels: [],
 			});
 		hide();
 	});

@@ -19,7 +19,7 @@ export function getMonth(month: number = dayjs().month()): Day[][] {
 			monthDayCursor++;
 
 			const day: Day = {
-				date: new Date(dayjs(new Date(currentYear, month, monthDayCursor))),
+				date: dayjs(new Date(currentYear, month, monthDayCursor)).toDate(),
 				currentMonth: monthDayCursor >= 1 && monthDayCursor <= daysInCurrentMonth,
 			};
 
