@@ -1,6 +1,4 @@
-import chroma from 'chroma-js';
 import styled from 'styled-components';
-import { LabelColor } from '../../models/theme';
 
 export const TaskWrapper = styled.li`
 	display: flex;
@@ -29,4 +27,3 @@ export const LabelsContainer = styled.div`
 	flex-wrap: wrap;
 	gap: 0.5rem;
 `;
-

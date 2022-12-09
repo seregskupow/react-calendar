@@ -6,6 +6,7 @@ export interface Task {
 	description: string;
 	labels: Label[];
 	date: number;
+	orderIndex: number;
 }
 
 export interface CreateTask {
@@ -20,5 +21,6 @@ export interface EditTask {
 	title?: string;
 	description?: string;
 	labels?: Label[];
-	date?: number;
+	date: number;
+	orderIndex?: number;
 }

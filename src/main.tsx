@@ -6,6 +6,7 @@ import App from './components/App/App';
 import { store } from './store';
 import GlobalStyles from './styles/globalStyles';
 import { theme } from './styles/theme';
+import './styles/style.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>

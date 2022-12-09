@@ -39,7 +39,6 @@ const TaskModal = () => {
 		register,
 		handleSubmit,
 		control,
-		watch,
 		formState: { errors },
 	} = useForm<FormData>({
 		defaultValues: {
@@ -47,7 +46,7 @@ const TaskModal = () => {
 		},
 	});
 
-	const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
+	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'labels',
 	});
@@ -73,9 +72,10 @@ const TaskModal = () => {
 				});
 				break;
 			case 'edit':
+				console.log(selectedTask);
 				editTask({
 					id: selectedTask!.id,
-					date: selectedTask?.date,
+					date: selectedTask!.date,
 					title: title,
 					description: description,
 					labels: labels.map((label) => ({
