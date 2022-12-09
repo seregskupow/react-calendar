@@ -14,7 +14,8 @@ import { FiEdit2 } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 import _ from 'lodash';
-import Label from '../Label/Label';
+import LabelComponent from '../Label/Label';
+import { Label } from '@/models';
 
 const SelectedTask = () => {
 	const { selectedTask } = useAppSelector(tasksSelector);
@@ -48,8 +49,8 @@ const SelectedTask = () => {
 			<FieldLabel>Labels</FieldLabel>
 			{!selectedTask?.labels?.length && <Text>No Labels</Text>}
 			<LabelsContainer>
-				{selectedTask?.labels?.map((label) => (
-					<Label key={_.uniqueId()} fontSize={1.5} title={label.title} color={label.color} />
+				{selectedTask?.labels?.map((label: Label) => (
+					<LabelComponent key={_.uniqueId()} fontSize={1.5} title={label.title} color={label.color} />
 				))}
 			</LabelsContainer>
 		</SelectedTaskWrapper>

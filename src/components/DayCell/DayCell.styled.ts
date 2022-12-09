@@ -121,18 +121,19 @@ export const DayNumber = styled.p<DayNumberProps>`
 			color: #fff;
 		`}
 `;
-
+export const TasksWrapper = styled.div`
+	height: calc(100% - 50px);
+`;
 export const TasksContainer = styled.ul`
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
 
-	height: calc(100% - 50px);
+	height: 100%;
 	padding: 0.5rem 0.5rem 1.5rem 0;
 
 	overflow-y: auto;
 
-	scroll-behavior: smooth;
 	overscroll-behavior: contain;
 
 	/* width */
