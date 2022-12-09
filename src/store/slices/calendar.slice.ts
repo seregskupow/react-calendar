@@ -48,7 +48,7 @@ export const calendarSlice = createSlice({
 });
 
 const getYearHolidays = createAsyncThunk('calendar/getYearHolidays b', async (year: number, thunkAPI) => {
-	const userLocale = (navigator.language || navigator.userLanguage).split('-')[1] || 'UA';
+	const userLocale = (navigator.language).split('-')[1] || 'UA';
 	const response = await fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/${userLocale}`);
 	const data = await response.json();
 	return data;
