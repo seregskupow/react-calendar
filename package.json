@@ -14,6 +14,7 @@
 		"@reduxjs/toolkit": "^1.9.1",
 		"chroma-js": "^2.4.2",
 		"dayjs": "^1.11.7",
+		"html2canvas": "^1.4.1",
 		"lodash": "^4.17.21",
 		"react": "^18.2.0",
 		"react-beautiful-dnd": "^13.1.1",
@@ -23,7 +24,8 @@
 		"react-redux": "^8.0.5",
 		"react-select": "^5.7.0",
 		"styled-components": "^5.3.6",
-		"styled-system": "^5.1.5"
+		"styled-system": "^5.1.5",
+		"use-react-screenshot": "^3.0.0"
 	},
 	"devDependencies": {
 		"@types/chroma-js": "^2.1.4",

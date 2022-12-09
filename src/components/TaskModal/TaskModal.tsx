@@ -119,7 +119,10 @@ const TaskModal = () => {
 						<div key={field.id}>
 							<FieldLabel style={{ marginBottom: '1rem' }}>Label title</FieldLabel>
 							<LabelWrapper>
-								<TextInput {...register(`labels.${index}.title` as const, { required: true, maxLength: 10 })} />
+								<TextInput
+									{...register(`labels.${index}.title` as const, { required: true, maxLength: 10 })}
+									maxLength={10}
+								/>
 
 								<Controller
 									name={`labels.${index}.color`}
@@ -132,8 +135,7 @@ const TaskModal = () => {
 									<FiTrash />
 								</GrayBtn>
 							</LabelWrapper>
-							{errors.labels?.[index]?.title && <Error>Label title is required</Error>}
-							{errors.labels?.[index]?.color && <Error>Label color is required</Error>}
+							{errors.labels?.[index]?.title && <Error mt={'1rem'}>Label title is required</Error>}
 						</div>
 					))}
 				</LabelsContainer>

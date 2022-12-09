@@ -1,14 +1,29 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
-	display: flex;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
 	gap: 1rem;
-	justify-content: center;
-	align-items: center;
 
-	height: 10vh;
+	height: ${({ theme }) => theme.layout.headerHeight};
 
 	border-bottom: 1px solid ${(props) => props.theme.colors.blue};
+	box-shadow: ${(props) => props.theme.shadows.sh1};
+`;
+
+export const HeaderContainerCell = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+
+	&:nth-child(1) {
+		justify-content: flex-end;
+	}
+
+	&:nth-child(3) {
+		justify-content: flex-start;
+	}
 `;
 
 export const Button = styled.button`

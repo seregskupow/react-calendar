@@ -9,12 +9,12 @@ import { theme } from './styles/theme';
 import './styles/style.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<ThemeProvider theme={theme}>
-				<GlobalStyles />
-				<App />
-			</ThemeProvider>
-		</Provider>
-	</React.StrictMode>,
+	// <React.StrictMode>
+	<Provider store={store}>
+		<ThemeProvider theme={theme}>
+			<GlobalStyles />
+			<App />
+		</ThemeProvider>
+	</Provider>,
+	// </React.StrictMode>,
 );
