@@ -1,11 +1,14 @@
+import { Body, MainContainer } from './App.styled';
+
 import React, { FC, useRef } from 'react';
-import _ from 'lodash';
+
 import Header from '@/components/Header/Header';
 import MonthGrid from '@/components/MonthGrid/MonthGrid';
 import Sidebar from '@/components/Sidebar/Sidebar';
-import { Body, MainContainer } from './App.styled';
-import ModalsContainer from '../ModalsContainer/ModalsContainer';
-import DnDContext from '../DnDContext/DnDContext';
+import ModalsContainer from '@/components/ModalsContainer/ModalsContainer';
+import DnDContext from '@/components/DnDContext/DnDContext';
+
+import _ from 'lodash';
 
 const App: FC = () => {
 	const calendarRef = useRef(null);

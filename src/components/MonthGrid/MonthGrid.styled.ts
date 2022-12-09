@@ -24,6 +24,6 @@ export const Grid = styled.div`
 	border-radius: 10px;
 	overflow: hidden;
 
-	min-width: 1575px;
-	min-height: 750px;
+	min-width: 1075px;
+	min-height: 650px;
 `;

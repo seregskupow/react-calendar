@@ -1,7 +1,3 @@
-import dayjs from 'dayjs';
-import _ from 'lodash';
-import { createRef, FC, Fragment, useEffect, useLayoutEffect, useRef, useState, WheelEvent } from 'react';
-
 import {
 	AddTaskButton,
 	CellHeader,
@@ -12,13 +8,16 @@ import {
 	TasksContainer,
 	TasksWrapper,
 } from './DayCell.styled';
-import { GiPartyPopper } from 'react-icons/gi';
-import { HiPlus } from 'react-icons/hi';
 import Task from '@/components/Task/Task';
 import { Day } from '@/models';
-import { useActions, useAppSelector } from '@/store';
-import { selectTodosForDay } from '@/store/slices/tasks.slice';
+import { useActions, useAppSelector, selectTodosForDay } from '@/store';
+import dayjs from 'dayjs';
+import _ from 'lodash';
+import { FC, useLayoutEffect, useRef, useState } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
+import { GiPartyPopper } from 'react-icons/gi';
+import { HiPlus } from 'react-icons/hi';
+
 interface DayCelProps {
 	day: Day;
 	weekIndex: number;
@@ -49,7 +48,6 @@ const DayCell: FC<DayCelProps> = ({ day, weekIndex }) => {
 			<CellHeader>
 				<AddTaskButton onClick={createTaskHandler}>
 					<HiPlus />
-					<span>Add task</span>
 				</AddTaskButton>
 				<DayEventsButton>
 					<GiPartyPopper />

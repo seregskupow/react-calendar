@@ -1,9 +1,11 @@
-import { forwardRef } from 'react';
-import { FC, Fragment, WheelEvent } from 'react';
-import DayCell from '@/components/DayCell/DayCell';
 import { Grid, MonthWrapper } from './MonthGrid.styled';
+
+import { Fragment, WheelEvent, forwardRef } from 'react';
+
+import DayCell from '@/components/DayCell/DayCell';
 import { Day } from '@/models';
 import { useActions, useAppSelector, calendarSelector } from '@/store';
+
 import _ from 'lodash';
 
 const MonthGrid = forwardRef<HTMLDivElement>((props, ref) => {

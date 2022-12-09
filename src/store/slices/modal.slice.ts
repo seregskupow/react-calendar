@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '..';
 import _ from 'lodash';
-import { tasksActions } from './tasks.slice';
 
 type ModalMode = 'create' | 'edit';
 
