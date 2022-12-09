@@ -1,10 +1,13 @@
+import { LabelsContainer, TaskTitle, TaskWrapper } from './Task.styled';
+
+import { FC } from 'react';
+
 import { Task } from '@/models';
 import { useActions } from '@/store';
-import _ from 'lodash';
-import { FC } from 'react';
-import Label from '../Label/Label';
-import { LabelsContainer, TaskTitle, TaskWrapper } from './Task.styled';
+import Label from '@/components/Label/Label';
+
 import { Draggable } from 'react-beautiful-dnd';
+import _ from 'lodash';
 
 interface TaskProps {
 	task: Task;

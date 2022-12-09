@@ -1,4 +1,3 @@
-import { Fragment, MouseEvent } from 'react';
 import {
 	Error,
 	TextInput,
@@ -11,17 +10,19 @@ import {
 	LabelWrapper,
 	LabelsContainer,
 } from './TaskModal.styled';
+import ColorSelect from './ColorSelect/ColorSelect';
+
+import { Fragment, MouseEvent } from 'react';
+
+import { useAppSelector, calendarSelector, useActions, tasksSelector, modalSelector } from '@/store';
+import { Label, LabelColor } from '@/models';
+import { Button, FieldLabel } from '@/components/UI';
+
 import { IoMdClose, IoMdAdd } from 'react-icons/io';
 import { FiTrash, FiEdit2 } from 'react-icons/fi';
+
 import { useFieldArray, useForm, Controller } from 'react-hook-form';
-import { useAppSelector, calendarSelector, useActions } from '@/store';
-import { Label, LabelColor } from '@/models';
-import ColorSelect, { ColourOption as ColorOption } from './ColorSelect/ColorSelect';
 import _ from 'lodash';
-import { Button } from '@/components/UI/Button.styled';
-import { tasksSelector } from '@/store/slices/tasks.slice';
-import { modalSelector } from '@/store/slices/modal.slice';
-import { FieldLabel } from '@/components/UI/FieldLabel.styled';
 
 export type FormData = {
 	title: string;
@@ -100,7 +101,12 @@ const TaskModal = () => {
 	return (
 		<ModalContainer>
 			<ModalBG onClick={(e) => closeModal(e)} />
-			<ModalForm onSubmit={onSubmit}>
+			<ModalForm
+				onSubmit={onSubmit}
+				initial={{ opacity: 0, scale: 0.95 }}
+				animate={{ opacity: 1, scale: 1 }}
+				exit={{ opacity: 0, scale: 0.95 }}
+				transition={{ duration: 0.2, ease: 'easeInOut' }}>
 				<ModalHeader>
 					<h2>{mode === 'create' ? 'Create' : 'Edit'} task</h2>
 					<Button type="button" onClick={(e) => closeModal(e)}>

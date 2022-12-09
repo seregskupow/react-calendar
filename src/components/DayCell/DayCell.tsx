@@ -8,15 +8,19 @@ import {
 	TasksContainer,
 	TasksWrapper,
 } from './DayCell.styled';
+
+import { FC, useLayoutEffect, useRef, useState } from 'react';
+
 import Task from '@/components/Task/Task';
 import { Day } from '@/models';
 import { useActions, useAppSelector, selectTodosForDay } from '@/store';
-import dayjs from 'dayjs';
-import _ from 'lodash';
-import { FC, useLayoutEffect, useRef, useState } from 'react';
-import { Droppable } from 'react-beautiful-dnd';
+
 import { GiPartyPopper } from 'react-icons/gi';
 import { HiPlus } from 'react-icons/hi';
+
+import { Droppable } from 'react-beautiful-dnd';
+import _ from 'lodash';
+import dayjs from 'dayjs';
 
 interface DayCelProps {
 	day: Day;

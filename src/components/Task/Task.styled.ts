@@ -7,10 +7,10 @@ export const TaskWrapper = styled.li`
 
 	background-color: #fff;
 
-	padding: 0.5rem 1rem;
+	padding: 0.3rem 0.5rem;
 
 	border-radius: 5px;
-	border: 1px solid lightgray;
+	border: 1px solid ${({ theme }) => theme.colors.lightGray};
 
 	box-shadow: ${({ theme }) => theme.shadows.sh1};
 
@@ -18,7 +18,7 @@ export const TaskWrapper = styled.li`
 `;
 
 export const TaskTitle = styled.p`
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	color: black;
 `;
 

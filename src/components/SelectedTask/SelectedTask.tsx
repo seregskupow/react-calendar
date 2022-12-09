@@ -1,6 +1,3 @@
-import { useActions, useAppSelector } from '@/store';
-import { tasksSelector } from '@/store/slices/tasks.slice';
-import { FieldLabel, Text } from '@/components/UI';
 import {
 	BtnsContainer,
 	DeleteBtn,
@@ -10,12 +7,17 @@ import {
 	SelectedTaskWrapper,
 	TaskTitle,
 } from './SelectedTask.styled';
+
+import { useActions, useAppSelector, tasksSelector } from '@/store';
+
+import { FieldLabel, Text } from '@/components/UI';
+import LabelComponent from '@/components/Label/Label';
+import { Label } from '@/models';
+
 import { FiEdit2 } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 import _ from 'lodash';
-import LabelComponent from '../Label/Label';
-import { Label } from '@/models';
 
 const SelectedTask = () => {
 	const { selectedTask } = useAppSelector(tasksSelector);
@@ -31,7 +33,11 @@ const SelectedTask = () => {
 	};
 
 	return (
-		<SelectedTaskWrapper>
+		<SelectedTaskWrapper
+			initial={{ opacity: 0, scale: 0.95 }}
+			animate={{ opacity: 1, scale: 1 }}
+			exit={{ opacity: 0, scale: 0.95 }}
+			transition={{ duration: 0.2, ease: 'easeInOut' }}>
 			<Header>
 				<TaskTitle>{selectedTask?.title}</TaskTitle>
 				<BtnsContainer>
