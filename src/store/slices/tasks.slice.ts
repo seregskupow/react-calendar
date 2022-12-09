@@ -1,7 +1,8 @@
+import { CreateTask, EditTask, Task } from '@/models/task';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
+
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '..';
-import { CreateTask, EditTask, Task } from '@/models/task';
 import _ from 'lodash';
 
 const TASKS = 'tasks';
@@ -61,9 +62,10 @@ export const tasksSlice = createSlice({
 		addTask: (state, action: PayloadAction<CreateTask>) => {
 			const dayTasks = state.tasks[action.payload.date];
 
-			let newTask: Task;
+			let newTask;
 			if (!dayTasks) {
 				newTask = { ...action.payload, id: _.uniqueId(), orderIndex: 0 };
+
 				state.tasks = {
 					...state.tasks,
 					...{ [action.payload.date]: [newTask] },
@@ -71,9 +73,10 @@ export const tasksSlice = createSlice({
 			} else {
 				const newIndex = dayTasks.length;
 				newTask = { ...action.payload, id: _.uniqueId(), orderIndex: newIndex };
+
 				state.tasks = {
 					...state.tasks,
-					...{ [action.payload.date]: [...dayTasks, { ...action.payload, id: _.uniqueId(), orderIndex: newIndex }] },
+					...{ [action.payload.date]: [...dayTasks, { ...newTask }] },
 				};
 			}
 			state.selectedTask = newTask;

@@ -7,16 +7,13 @@ import {
 	SelectedTaskWrapper,
 	TaskTitle,
 } from './SelectedTask.styled';
-
-import { useActions, useAppSelector, tasksSelector } from '@/store';
-
 import { FieldLabel, Text } from '@/components/UI';
-import LabelComponent from '@/components/Label/Label';
-import { Label } from '@/models';
+import { tasksSelector, useActions, useAppSelector } from '@/store';
 
-import { FiEdit2 } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
-
+import { FiEdit2 } from 'react-icons/fi';
+import { Label } from '@/models';
+import LabelComponent from '@/components/Label/Label';
 import _ from 'lodash';
 
 const SelectedTask = () => {
@@ -29,6 +26,7 @@ const SelectedTask = () => {
 	};
 
 	const deleteTaskHandler = () => {
+		console.log(selectedTask!.id);
 		deleteTask(selectedTask!.id);
 	};
 
