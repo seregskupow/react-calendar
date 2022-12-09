@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { space, SpaceProps } from 'styled-system';
+import { motion } from 'framer-motion';
 
 export const ModalContainer = styled.div`
 	position: fixed;
@@ -48,7 +49,7 @@ export const ModalHeader = styled.div`
 	}
 `;
 
-export const ModalForm = styled.form`
+export const ModalForm = styled(motion.form)`
 	width: 30%;
 	min-width: 300px;
 	max-height: 100%;
@@ -78,7 +79,7 @@ const sharedInputStyle = (props: any) => css`
 
 	border-radius: 10px;
 	border: 2px solid;
-	border-color: lightgrey;
+	border-color: ${props.theme.colors.lightGray};
 
 	transition: all 0.3s ease;
 

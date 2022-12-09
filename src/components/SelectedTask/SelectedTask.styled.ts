@@ -1,7 +1,8 @@
 import chroma from 'chroma-js';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const SelectedTaskWrapper = styled.div`
+export const SelectedTaskWrapper = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;

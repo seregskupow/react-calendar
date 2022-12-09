@@ -1,7 +1,8 @@
-import { useAppSelector, useActions } from '@/store';
-import { tasksSelector } from '@/store/slices/tasks.slice';
-import { FC } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { useActions, useAppSelector } from '@/store';
+
+import { FC } from 'react';
+import { tasksSelector } from '@/store/slices/tasks.slice';
 
 interface DnDContextProps {
 	children: React.ReactNode;
@@ -11,6 +12,11 @@ const DnDContext: FC<DnDContextProps> = ({ children }) => {
 	const { tasks } = useAppSelector(tasksSelector);
 	const { setTasksForDay } = useActions();
 
+	/**
+	 *
+	 * @param result DropResult
+	 * Detects source and destination drop containers and moves tasks accordinly
+	 */
 	const onDragEndHandler = (result: DropResult) => {
 		if (!result.destination) return;
 		const { source, destination } = result;

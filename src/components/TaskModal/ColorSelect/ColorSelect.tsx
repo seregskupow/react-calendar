@@ -1,26 +1,28 @@
+import { FC } from 'react';
+
 import { LabelColor, LabelColorTitle } from '@/models';
-import chroma from 'chroma-js';
 import { theme } from '@/styles/theme';
 
-import Select, { StylesConfig } from 'react-select';
-import _ from 'lodash';
-import { ControllerRenderProps } from 'react-hook-form';
-import { FC } from 'react';
 import { FormData } from '../TaskModal';
 
-export interface ColourOption {
+import { ControllerRenderProps } from 'react-hook-form';
+import Select, { StylesConfig } from 'react-select';
+import chroma from 'chroma-js';
+import _ from 'lodash';
+
+export interface ColorOption {
 	value: string;
 	label: LabelColorTitle;
 	color: LabelColor;
 }
 
-export const colourOptions: ColourOption[] = Object.entries(theme.colors).map((color) => {
+export const colourOptions: ColorOption[] = Object.entries(theme.colors).map((color) => {
 	const [key, value] = color;
 	return {
 		value: key,
 		label: _.capitalize(key),
 		color: value,
-	} as ColourOption;
+	} as ColorOption;
 });
 
 const dot = (color = 'transparent') => ({
@@ -38,7 +40,7 @@ const dot = (color = 'transparent') => ({
 	},
 });
 
-const colourStyles: StylesConfig<ColourOption> = {
+const colourStyles: StylesConfig<ColorOption> = {
 	control: (styles) => ({
 		...styles,
 		backgroundColor: 'white',

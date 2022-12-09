@@ -1,6 +1,7 @@
-import { LabelColor } from '@/models/theme';
 import { FC } from 'react';
+import { LabelColor } from '@/models/theme';
 import { LabelElement } from './Label.styled';
+
 interface LabelProps {
 	title: string;
 	color?: LabelColor;

@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
 import calendaReducer from './slices/calendar.slice';
+import { configureStore } from '@reduxjs/toolkit';
 import modalSlice from './slices/modal.slice';
 import tasksSlice from './slices/tasks.slice';
 
@@ -18,7 +18,6 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export * from './useActions';
 export * from './hooks';
 
-export * from './slices/calendar.slice';
+export * from './slices';

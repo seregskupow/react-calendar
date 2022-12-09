@@ -1,20 +1,17 @@
-import _ from 'lodash';
-import Label from '@/components/Label/Label';
-import { SidebarWrapper, LabelsContainer } from './Sidebar.styled';
+import { SidebarWrapper } from './Sidebar.styled';
 import { useAppSelector } from '@/store';
 import { tasksSelector } from '@/store/slices/tasks.slice';
-import SelectedTask from '../SelectedTask/SelectedTask';
+import SelectedTask from '@/components/SelectedTask/SelectedTask';
+
+import { AnimatePresence } from 'framer-motion';
+
+import _ from 'lodash';
 
 const Sidebar = () => {
 	const { selectedTask } = useAppSelector(tasksSelector);
 	return (
 		<SidebarWrapper>
-			{selectedTask && <SelectedTask />}
-			{/* <LabelsContainer>
-				{new Array(5).fill(null).map((item) => (
-					<Label label="Some label" key={_.uniqueId()} />
-				))}
-			</LabelsContainer> */}
+			<AnimatePresence>{selectedTask && <SelectedTask />}</AnimatePresence>
 		</SidebarWrapper>
 	);
 };

@@ -1,5 +1,5 @@
-import dayjs, { Dayjs } from 'dayjs';
-import { Day } from '../models';
+import { Day } from '@/models';
+import dayjs from 'dayjs';
 
 const DAYS = 7;
 const WEEKS = 5;
@@ -7,7 +7,7 @@ const WEEKS = 5;
 export function getMonth(month: number = dayjs().month()): Day[][] {
 	const currentYear = dayjs().year();
 	const daysInCurrentMonth = dayjs(new Date(currentYear, month)).daysInMonth();
-	/** -1 because to start week from Monday */
+	/** -1 to start week from Monday */
 	const firstDayOfMonthIndex = dayjs(new Date(currentYear, month, 1)).day() - 1;
 
 	let monthDayCursor = 0 - firstDayOfMonthIndex;

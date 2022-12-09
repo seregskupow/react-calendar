@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { Button } from '@/components/UI/Button.styled';
 import { HeaderContainer, HeaderContainerCell, YearLabel } from './Header.styled';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -7,7 +7,7 @@ import { TbPhoto } from 'react-icons/tb';
 
 import { BsArrowCounterclockwise } from 'react-icons/bs';
 import { calendarSelector, useActions, useAppSelector } from '@/store';
-import { useScreenshot, createFileName } from 'use-react-screenshot';
+import { createFileName, useScreenshot } from '@/hooks/useScreenshot';
 
 interface HeaderProps {
 	calendarRef: { current: any };
@@ -21,14 +21,6 @@ const Header: FC<HeaderProps> = ({ calendarRef }) => {
 		type: 'image/jpeg',
 		quality: 1.0,
 	});
-
-	// useEffect(() => {
-	// 	console.log({ holidays });
-	// }, [holidays]);
-
-	// useEffect(() => {
-	// 	getYearHolidays(2022);
-	// }, []);
 
 	const download = (image: any, { name = 'img', extension = 'jpg' } = {}) => {
 		const a = document.createElement('a');

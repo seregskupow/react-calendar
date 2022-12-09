@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '..';
-import { Day } from '../../models';
-import { getMonth } from '../../utils/date';
+
 import dayjs from 'dayjs';
-import { Holiday } from '@/models/holiday';
+import { Day, Holiday } from '@/models';
+
+import { getMonth } from '@/utils/date';
 
 interface CalendarState {
 	month: Day[][];
@@ -48,7 +49,8 @@ export const calendarSlice = createSlice({
 });
 
 const getYearHolidays = createAsyncThunk('calendar/getYearHolidays b', async (year: number, thunkAPI) => {
-	const userLocale = (navigator.language).split('-')[1] || 'UA';
+	//Todo: change with backend detection
+	const userLocale = navigator.language.split('-')[1] || 'UA';
 	const response = await fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/${userLocale}`);
 	const data = await response.json();
 	return data;

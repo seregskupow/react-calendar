@@ -15,7 +15,7 @@ export const Button = styled.button`
 	border-radius: 10px;
 	border: 1px solid ${(props) => props.theme.colors.blue};
 
-	padding: 1rem;
+	padding: 0.5rem;
 
 	font-size: 2rem;
 	text-decoration: none;
