@@ -11,8 +11,9 @@ export const DayContainer = styled.div<DayContainerProps>`
 	flex-direction: column;
 
 	padding: 0rem 1rem;
+	background-color: #ffffff;
 
-	border: 1px solid lightgray;
+	/* border: 1px solid lightgray; */
 
 	transition: background-color 0.3s ease, border-color 0.3s ease;
 
@@ -149,12 +150,12 @@ export const TasksContainer = styled.ul`
 
 	/* Handle */
 	&::-webkit-scrollbar-thumb {
-		background: #888;
+		background: ${(props) => props.theme.colors.blue};
 		border-radius: 5px;
 	}
 
 	/* Handle on hover */
 	&::-webkit-scrollbar-thumb:hover {
-		background: #555;
+		background: ${(props) => props.theme.colors.blue};
 	}
 `;

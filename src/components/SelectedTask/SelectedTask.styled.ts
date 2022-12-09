@@ -13,11 +13,14 @@ export const SelectedTaskWrapper = styled.div`
 	border: 1px solid ${({ theme }) => theme.colors.lightGray};
 
 	border-radius: 10px;
+
+	box-shadow: ${(props) => props.theme.shadows.sh1};
 `;
 
 export const Header = styled.div`
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	gap: 0.5rem;
 `;
 
@@ -28,7 +31,7 @@ export const LabelsContainer = styled.div`
 `;
 
 export const TaskTitle = styled.h2`
-	font-size: 1.5rem;
+	font-size: 1.8rem;
 	word-wrap: break-word;
 `;
 

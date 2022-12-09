@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import _ from 'lodash';
-import { FC, Fragment, useEffect, useLayoutEffect, useRef, useState, WheelEvent } from 'react';
+import { createRef, FC, Fragment, useEffect, useLayoutEffect, useRef, useState, WheelEvent } from 'react';
 
 import {
 	AddTaskButton,
@@ -36,7 +36,7 @@ const DayCell: FC<DayCelProps> = ({ day, weekIndex }) => {
 			const container = tasksContainerRef.current;
 			setOverflowing(container!.scrollHeight > container!.clientHeight);
 		}
-	}, []);
+	}, [tasks.length]);
 
 	const createTaskHandler = () => {
 		selectDay(day.date);

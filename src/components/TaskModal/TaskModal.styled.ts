@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { space, SpaceProps } from 'styled-system';
 
 export const ModalContainer = styled.div`
 	position: fixed;
@@ -151,7 +152,9 @@ export const LabelWrapper = styled.div`
 	column-gap: 0.5rem;
 `;
 
-export const Error = styled.span`
+export const Error = styled.p<SpaceProps>`
 	font-size: 1.5rem;
 	color: ${(props) => props.theme.colors.red};
+
+	${space}
 `;

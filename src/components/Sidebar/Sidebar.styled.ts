@@ -5,7 +5,7 @@ export const SidebarWrapper = styled.aside`
 	flex-direction: column;
 	gap: 1rem;
 
-	padding: 1rem;
+	padding: 2rem 0 2rem 1rem;
 `;
 
 export const LabelsContainer = styled.ul`

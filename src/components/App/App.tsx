@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import _ from 'lodash';
 import Header from '@/components/Header/Header';
 import MonthGrid from '@/components/MonthGrid/MonthGrid';
@@ -8,15 +8,16 @@ import ModalsContainer from '../ModalsContainer/ModalsContainer';
 import DnDContext from '../DnDContext/DnDContext';
 
 const App: FC = () => {
+	const calendarRef = useRef(null);
 	return (
 		<React.Fragment>
 			<ModalsContainer />
 			<DnDContext>
 				<MainContainer>
-					<Header />
+					<Header calendarRef={calendarRef} />
 					<Body>
 						<Sidebar />
-						<MonthGrid />
+						<MonthGrid ref={calendarRef} />
 					</Body>
 				</MainContainer>
 			</DnDContext>

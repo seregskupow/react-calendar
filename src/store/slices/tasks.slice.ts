@@ -1,14 +1,20 @@
-import { createSelector, createSlice, current } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '..';
 import { CreateTask, EditTask, Task } from '@/models/task';
 import _ from 'lodash';
-import dayjs from 'dayjs';
-import { modalActions } from './modal.slice';
 
 const TASKS = 'tasks';
 const SELECTED_TASK = 'selected_task';
 
+//TODO: implement better tasks structure
+// {
+// 	[year: number]: {
+// 		[month: number]: {
+// 			[day: number] : Task[]
+// 		}
+// 	}
+// }
 interface DayTasks {
 	[key: number]: Task[];
 }
