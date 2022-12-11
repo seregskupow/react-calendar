@@ -10,7 +10,7 @@ import {
 	TasksContainer,
 	TasksWrapper,
 } from './DayCell.styled';
-import { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { FC, useLayoutEffect, useRef, useState } from 'react';
 import { selectHolidaysForToday, selectTodosForDay, useActions, useAppSelector } from '@/store';
 
 import { Day } from '@/models';
@@ -20,7 +20,6 @@ import { HiPlus } from 'react-icons/hi';
 import Task from '@/components/Task/Task';
 import _ from 'lodash';
 import dayjs from 'dayjs';
-import { useClickOutside } from '@/hooks';
 
 interface DayCelProps {
 	day: Day;
@@ -62,12 +61,18 @@ const DayCell: FC<DayCelProps> = ({ day, weekIndex }) => {
 	return (
 		<DayContainer $overflow={tasksOverflowing} key={_.uniqueId()}>
 			{showHolidays && (
-				<HolidaysContainer ref={holidaysContainerRef} onWheel={(e) => holidaysOverflowing && e.stopPropagation()}>
+				<HolidaysContainer
+					ref={holidaysContainerRef}
+					onWheel={(e) => holidaysOverflowing && e.stopPropagation()}
+					initial={{ opacity: 0, scale: 0.95 }}
+					animate={{ opacity: 1, scale: 1 }}
+					transition={{ duration: 0.2, ease: 'easeInOut' }}>
 					{holidays.map((holiday) => (
 						<HolidayName key={_.uniqueId()}>{holiday.localName}</HolidayName>
 					))}
 				</HolidaysContainer>
 			)}
+
 			<CellHeader>
 				<AddTaskButton onClick={createTaskHandler} title="Add task">
 					<HiPlus />

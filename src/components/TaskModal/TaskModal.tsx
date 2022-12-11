@@ -1,4 +1,4 @@
-import { Button, FieldLabel } from '@/components/UI';
+import { Button, FieldLabel, TextArea, TextInput } from '@/components/UI';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import {
 	Error,
@@ -9,8 +9,6 @@ import {
 	ModalContainer,
 	ModalForm,
 	ModalHeader,
-	TextArea,
-	TextInput,
 } from './TaskModal.styled';
 import { FiEdit2, FiTrash } from 'react-icons/fi';
 import { Fragment, MouseEvent } from 'react';
@@ -109,7 +107,7 @@ const TaskModal = () => {
 					</Button>
 				</ModalHeader>
 				<FieldLabel>Title</FieldLabel>
-				<TextInput {...register('title', { required: true, maxLength: 10 })} maxLength={10} />
+				<TextInput {...register('title', { required: true, maxLength: 20 })} maxLength={20} />
 				{errors.title && <Error>This field is required</Error>}
 				<FieldLabel>Description</FieldLabel>
 				<TextArea {...register('description', { maxLength: 250 })} maxLength={250} />
