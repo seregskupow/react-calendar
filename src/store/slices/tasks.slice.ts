@@ -1,6 +1,9 @@
 import { CreateTask, EditTask, Task } from '@/models/task';
+import { TaskValidationSchema, TasksValidationSchema } from '@/utils';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 
+import Ajv from 'ajv';
+import { DayTasks } from '@/models';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '..';
 import _ from 'lodash';
@@ -16,14 +19,16 @@ const SELECTED_TASK = 'selected_task';
 // 		}
 // 	}
 // }
-interface DayTasks {
-	[key: number]: Task[];
-}
 
 interface TaskState {
 	tasks: DayTasks;
 	selectedTask: Task | null;
+	titleFilter: string;
 }
+
+const ajv = new Ajv();
+const dayTasksValidator = ajv.compile(TasksValidationSchema);
+const singleTaskValidator = ajv.compile(TaskValidationSchema);
 
 const retrieveTasksFromLocalStorage = (): DayTasks => {
 	try {
@@ -50,9 +55,13 @@ const saveToLocalStorage = (key: string, value: any) => {
 
 const tasks = retrieveTasksFromLocalStorage();
 const selectedTask = retrieveselectedTaskFromLocalStorage();
+
+const localStorageDataIsValid = dayTasksValidator(tasks) && singleTaskValidator(selectedTask);
+
 const initialState: TaskState = {
-	tasks: tasks,
-	selectedTask: selectedTask || null,
+	tasks: localStorageDataIsValid ? tasks : [],
+	selectedTask: localStorageDataIsValid ? selectedTask : null,
+	titleFilter: '',
 };
 
 export const tasksSlice = createSlice({
@@ -81,7 +90,7 @@ export const tasksSlice = createSlice({
 			}
 			state.selectedTask = newTask;
 			saveToLocalStorage(TASKS, state.tasks);
-			saveToLocalStorage(SELECTED_TASK, state.selectedTask.id);
+			saveToLocalStorage(SELECTED_TASK, state.selectedTask);
 		},
 
 		selectTask: (state, action: PayloadAction<string>) => {
@@ -111,7 +120,10 @@ export const tasksSlice = createSlice({
 					const clone = _.cloneDeep(value);
 					clone.splice(taskToDelete, 1);
 
-					state.tasks = { ...state.tasks, [key]: clone.map((item, index) => ({ ...item, orderIndex: index })) };
+					state.tasks = _.omitBy(
+						{ ...state.tasks, [key]: clone.map((item, index) => ({ ...item, orderIndex: index })) },
+						_.isEmpty,
+					);
 					break;
 				}
 			}
@@ -142,17 +154,34 @@ export const tasksSlice = createSlice({
 			saveToLocalStorage(SELECTED_TASK, state.selectedTask);
 		},
 
-		setTasksForDay: (state, action: PayloadAction<{ day: number; tasks: Task[] }>) => {
-			state.tasks = { ...state.tasks, [action.payload.day]: action.payload.tasks };
+		setTasks: (state, action: PayloadAction<DayTasks>) => {
+			state.tasks = action.payload;
 			saveToLocalStorage(TASKS, state.tasks);
+		},
+
+		setTasksForDay: (state, action: PayloadAction<{ day: number; tasks: Task[] }>) => {
+			state.tasks = _.omitBy({ ...state.tasks, [action.payload.day]: action.payload.tasks }, _.isEmpty);
+			saveToLocalStorage(TASKS, state.tasks);
+		},
+
+		setTitleFilter: (state, action: PayloadAction<string>) => {
+			state.titleFilter = action.payload;
 		},
 	},
 });
 
 export const selectTodosForDay = createSelector(
 	(state: RootState) => state.tasks.tasks,
+	(state: RootState) => state.tasks.titleFilter,
 	(_: RootState, day: Date) => day,
-	(tasks, day) => tasks[day.valueOf()] || [],
+	(tasks, filter, day) =>
+		tasks[day.valueOf()]?.filter((task) => {
+			const filterLower = filter.toLowerCase();
+			const titleMatch = task.title.toLowerCase().includes(filterLower);
+			const labelMatch = task.labels.some((label) => label.title.toLowerCase().includes(filterLower));
+
+			return titleMatch || labelMatch;
+		}) || [],
 );
 export const tasksActions = tasksSlice.actions;
 
