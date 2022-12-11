@@ -3,6 +3,7 @@ export const theme = {
 		headerHeight: '6vh',
 	},
 	bg: '#fff',
+	containerBrdrR: '10px',
 	colors: {
 		blue: '#4361ee',
 		green: '#06d6a0',

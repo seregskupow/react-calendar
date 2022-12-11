@@ -1,5 +1,6 @@
+import { SpaceProps, space } from 'styled-system';
 import styled, { css } from 'styled-components';
-import { space, SpaceProps } from 'styled-system';
+
 import { motion } from 'framer-motion';
 
 export const ModalContainer = styled.div`
@@ -63,7 +64,7 @@ export const ModalForm = styled(motion.form)`
 	background-color: #ffffff;
 
 	border: 1px solid lightgrey;
-	border-radius: 10px;
+	border-radius: ${(props) => props.theme.containerBrdrR};
 
 	box-shadow: ${(props) => props.theme.shadows.sh2};
 	z-index: 11;
@@ -77,7 +78,7 @@ const sharedInputStyle = (props: any) => css`
 
 	padding: 1rem;
 
-	border-radius: 10px;
+	border-radius: ${(props) => props.theme.containerBrdrR};
 	border: 2px solid;
 	border-color: ${props.theme.colors.lightGray};
 

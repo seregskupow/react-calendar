@@ -34,7 +34,7 @@ export const Button = styled.button`
 	background-color: ${(props) => props.theme.colors.blue};
 	color: #fff;
 
-	border-radius: 10px;
+	border-radius: ${(props) => props.theme.containerBrdrR};
 	border: 1px solid ${(props) => props.theme.colors.blue};
 
 	padding: 1rem;

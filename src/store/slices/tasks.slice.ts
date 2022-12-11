@@ -127,7 +127,6 @@ export const tasksSlice = createSlice({
 			const editedArr = dayTasks.map((task) => {
 				if (task.id === action.payload.id) {
 					const editedTask = { ...task, ...action.payload };
-					console.log({ editedTask });
 					state.selectedTask = editedTask;
 					return editedTask;
 				}
@@ -148,21 +147,15 @@ export const tasksSlice = createSlice({
 			saveToLocalStorage(TASKS, state.tasks);
 		},
 	},
-	// extraReducers: (builder) => {
-	// 	builder.addCase(modalActions.hide, (state) => {
-	// 		state.selectedTask = null;
-	// 	});
-	// },
 });
-
-export const tasksActions = tasksSlice.actions;
-
-export const tasksSelector = (state: RootState) => state.tasks;
 
 export const selectTodosForDay = createSelector(
 	(state: RootState) => state.tasks.tasks,
 	(_: RootState, day: Date) => day,
 	(tasks, day) => tasks[day.valueOf()] || [],
 );
+export const tasksActions = tasksSlice.actions;
+
+export const tasksSelector = (state: RootState) => state.tasks;
 
 export default tasksSlice.reducer;

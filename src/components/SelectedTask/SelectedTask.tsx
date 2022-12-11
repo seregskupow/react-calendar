@@ -26,7 +26,6 @@ const SelectedTask = () => {
 	};
 
 	const deleteTaskHandler = () => {
-		console.log(selectedTask!.id);
 		deleteTask(selectedTask!.id);
 	};
 

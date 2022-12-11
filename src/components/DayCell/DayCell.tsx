@@ -5,22 +5,22 @@ import {
 	DayEventsButton,
 	DayName,
 	DayNumber,
+	HolidayName,
+	HolidaysContainer,
 	TasksContainer,
 	TasksWrapper,
 } from './DayCell.styled';
+import { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { selectHolidaysForToday, selectTodosForDay, useActions, useAppSelector } from '@/store';
 
-import { FC, useLayoutEffect, useRef, useState } from 'react';
-
-import Task from '@/components/Task/Task';
 import { Day } from '@/models';
-import { useActions, useAppSelector, selectTodosForDay } from '@/store';
-
+import { Droppable } from 'react-beautiful-dnd';
 import { GiPartyPopper } from 'react-icons/gi';
 import { HiPlus } from 'react-icons/hi';
-
-import { Droppable } from 'react-beautiful-dnd';
+import Task from '@/components/Task/Task';
 import _ from 'lodash';
 import dayjs from 'dayjs';
+import { useClickOutside } from '@/hooks';
 
 interface DayCelProps {
 	day: Day;
@@ -29,17 +29,29 @@ interface DayCelProps {
 
 const DayCell: FC<DayCelProps> = ({ day, weekIndex }) => {
 	const tasks = useAppSelector((state) => selectTodosForDay(state, day.date));
+	const holidays = useAppSelector((state) => selectHolidaysForToday(state, day.date));
 	const { show, selectDay, deselectTask } = useActions();
 
-	const [overflowing, setOverflowing] = useState(false);
+	const [tasksOverflowing, setTasksOverflowing] = useState(false);
 	const tasksContainerRef = useRef<HTMLUListElement>(null);
+
+	const [showHolidays, setShowHolidays] = useState(false);
+	const [holidaysOverflowing, setHolidaysOverflowing] = useState(false);
+	const holidaysContainerRef = useRef<HTMLUListElement>(null);
 
 	useLayoutEffect(() => {
 		if (tasksContainerRef.current) {
 			const container = tasksContainerRef.current;
-			setOverflowing(container!.scrollHeight > container!.clientHeight);
+			setTasksOverflowing(container!.scrollHeight > container!.clientHeight);
 		}
 	}, [tasks.length]);
+
+	useLayoutEffect(() => {
+		if (holidaysContainerRef.current) {
+			const container = holidaysContainerRef.current;
+			setHolidaysOverflowing(container!.scrollHeight > container!.clientHeight);
+		}
+	}, [holidays.length, showHolidays]);
 
 	const createTaskHandler = () => {
 		selectDay(day.date);
@@ -48,14 +60,24 @@ const DayCell: FC<DayCelProps> = ({ day, weekIndex }) => {
 	};
 
 	return (
-		<DayContainer $overflow={overflowing} key={_.uniqueId()}>
+		<DayContainer $overflow={tasksOverflowing} key={_.uniqueId()}>
+			{showHolidays && (
+				<HolidaysContainer ref={holidaysContainerRef} onWheel={(e) => holidaysOverflowing && e.stopPropagation()}>
+					{holidays.map((holiday) => (
+						<HolidayName key={_.uniqueId()}>{holiday.localName}</HolidayName>
+					))}
+				</HolidaysContainer>
+			)}
 			<CellHeader>
-				<AddTaskButton onClick={createTaskHandler}>
+				<AddTaskButton onClick={createTaskHandler} title="Add task">
 					<HiPlus />
 				</AddTaskButton>
-				<DayEventsButton>
-					<GiPartyPopper />
-				</DayEventsButton>
+				{holidays.length > 0 && (
+					<DayEventsButton onClick={() => setShowHolidays(!showHolidays)} title="Show holidays">
+						<GiPartyPopper />
+						{holidays.length}
+					</DayEventsButton>
+				)}
 
 				{weekIndex === 0 && <DayName>{dayjs(day.date).format('dddd')}</DayName>}
 
@@ -68,7 +90,7 @@ const DayCell: FC<DayCelProps> = ({ day, weekIndex }) => {
 			<Droppable key={day.date.valueOf()} droppableId={day.date.valueOf().toString()}>
 				{(provided, snapshot) => (
 					<TasksWrapper ref={provided.innerRef} {...provided.droppableProps}>
-						<TasksContainer ref={tasksContainerRef} onWheel={(e) => overflowing && e.stopPropagation()}>
+						<TasksContainer ref={tasksContainerRef} onWheel={(e) => tasksOverflowing && e.stopPropagation()}>
 							{tasks.map((task, index) => (
 								<Task task={task} key={_.uniqueId()} />
 							))}

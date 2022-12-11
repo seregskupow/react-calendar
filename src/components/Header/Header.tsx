@@ -1,21 +1,22 @@
-import dayjs from 'dayjs';
-import { FC } from 'react';
-import { Button } from '@/components/UI/Button.styled';
-import { HeaderContainer, HeaderContainerCell, YearLabel } from './Header.styled';
+import { FC, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { TbPhoto } from 'react-icons/tb';
-
-import { BsArrowCounterclockwise } from 'react-icons/bs';
+import { HeaderContainer, HeaderContainerCell, YearLabel } from './Header.styled';
 import { calendarSelector, useActions, useAppSelector } from '@/store';
 import { createFileName, useScreenshot } from '@/hooks/useScreenshot';
+
+import { BsArrowCounterclockwise } from 'react-icons/bs';
+import { Button } from '@/components/UI/Button.styled';
+import { TbPhoto } from 'react-icons/tb';
+import dayjs from 'dayjs';
+import { getCurrentYear } from '@/utils/date';
 
 interface HeaderProps {
 	calendarRef: { current: any };
 }
 
 const Header: FC<HeaderProps> = ({ calendarRef }) => {
-	const { nextMonth, prevMonth, setCurrentMonth, getYearHolidays } = useActions();
-	const { monthIndex, holidays } = useAppSelector(calendarSelector);
+	const { nextMonth, prevMonth, setCurrentMonth, getWorlwideHolidays } = useActions();
+	const { monthIndex, holidays, currentYear } = useAppSelector(calendarSelector);
 
 	const [image, takeScreenShot] = useScreenshot({
 		type: 'image/jpeg',
@@ -28,6 +29,10 @@ const Header: FC<HeaderProps> = ({ calendarRef }) => {
 		a.download = createFileName(extension, name);
 		a.click();
 	};
+
+	useEffect(() => {
+		getWorlwideHolidays(currentYear);
+	}, [currentYear]);
 
 	//Todo: remove box shadow when taking screenshot
 	const downloadScreenshot = () => calendarRef.current && takeScreenShot(calendarRef.current).then(download);

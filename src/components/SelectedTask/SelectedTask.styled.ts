@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import styled from 'styled-components';
 
 export const SelectedTaskWrapper = styled(motion.div)`
 	display: flex;
@@ -13,7 +13,7 @@ export const SelectedTaskWrapper = styled(motion.div)`
 
 	border: 1px solid ${({ theme }) => theme.colors.lightGray};
 
-	border-radius: 10px;
+	border-radius: ${(props) => props.theme.containerBrdrR};
 
 	box-shadow: ${(props) => props.theme.shadows.sh1};
 `;

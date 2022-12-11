@@ -39,13 +39,13 @@ const GlobalStyles = createGlobalStyle`
 
 	/* Handle */
 	&::-webkit-scrollbar-thumb {
-		background: #888;
+		background: ${(props) => props.theme.colors.blue};
 		border-radius: 5px;
 	}
 
 	/* Handle on hover */
 	&::-webkit-scrollbar-thumb:hover {
-		background: #555;
+		background: ${(props) => props.theme.colors.blue};
 	}
 `;
 
