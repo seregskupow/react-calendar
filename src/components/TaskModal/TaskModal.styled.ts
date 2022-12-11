@@ -1,5 +1,6 @@
+import { SpaceProps, space } from 'styled-system';
 import styled, { css } from 'styled-components';
-import { space, SpaceProps } from 'styled-system';
+
 import { motion } from 'framer-motion';
 
 export const ModalContainer = styled.div`
@@ -63,44 +64,12 @@ export const ModalForm = styled(motion.form)`
 	background-color: #ffffff;
 
 	border: 1px solid lightgrey;
-	border-radius: 10px;
+	border-radius: ${(props) => props.theme.containerBrdrR};
 
 	box-shadow: ${(props) => props.theme.shadows.sh2};
 	z-index: 11;
 
 	overflow-y: auto;
-`;
-
-const sharedInputStyle = (props: any) => css`
-	width: 100%;
-	font-size: 1.5rem;
-
-	padding: 1rem;
-
-	border-radius: 10px;
-	border: 2px solid;
-	border-color: ${props.theme.colors.lightGray};
-
-	transition: all 0.3s ease;
-
-	&:focus {
-		border-color: ${props.theme.colors.blue};
-		box-shadow: 0 0 1px 4px #4362ee63;
-	}
-`;
-
-export const TextInput = styled.input.attrs({
-	type: 'text',
-})`
-	${sharedInputStyle};
-`;
-
-export const TextArea = styled.textarea.attrs({
-	rows: 5,
-	cols: 5,
-})`
-	${sharedInputStyle};
-	resize: none;
 `;
 
 export const GrayBtn = styled.button`

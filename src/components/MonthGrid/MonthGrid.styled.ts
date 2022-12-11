@@ -21,7 +21,7 @@ export const Grid = styled.div`
 	grid-gap: 1px;
 
 	border: 1px solid ${(props) => props.theme.colors.lightGray};
-	border-radius: 10px;
+	border-radius: ${(props) => props.theme.containerBrdrR};
 	overflow: hidden;
 
 	min-width: 1075px;

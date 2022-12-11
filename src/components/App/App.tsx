@@ -1,13 +1,14 @@
-import { Body, MainContainer } from './App.styled';
+import 'react-toastify/dist/ReactToastify.css';
 
+import { Body, MainContainer } from './App.styled';
 import React, { FC, useRef } from 'react';
 
+import DnDContext from '@/components/DnDContext/DnDContext';
 import Header from '@/components/Header/Header';
+import ModalsContainer from '@/components/ModalsContainer/ModalsContainer';
 import MonthGrid from '@/components/MonthGrid/MonthGrid';
 import Sidebar from '@/components/Sidebar/Sidebar';
-import ModalsContainer from '@/components/ModalsContainer/ModalsContainer';
-import DnDContext from '@/components/DnDContext/DnDContext';
-
+import { ToastContainer } from 'react-toastify';
 import _ from 'lodash';
 
 const App: FC = () => {
@@ -15,6 +16,7 @@ const App: FC = () => {
 	return (
 		<React.Fragment>
 			<ModalsContainer />
+			<ToastContainer style={{ fontSize: '20px' }} />
 			<DnDContext>
 				<MainContainer>
 					<Header calendarRef={calendarRef} />

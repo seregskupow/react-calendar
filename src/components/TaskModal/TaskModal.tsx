@@ -1,27 +1,22 @@
+import { Button, FieldLabel, TextArea, TextInput } from '@/components/UI';
+import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import {
 	Error,
-	TextInput,
-	TextArea,
+	GrayBtn,
+	LabelWrapper,
+	LabelsContainer,
 	ModalBG,
 	ModalContainer,
 	ModalForm,
 	ModalHeader,
-	GrayBtn,
-	LabelWrapper,
-	LabelsContainer,
 } from './TaskModal.styled';
-import ColorSelect from './ColorSelect/ColorSelect';
-
+import { FiEdit2, FiTrash } from 'react-icons/fi';
 import { Fragment, MouseEvent } from 'react';
-
-import { useAppSelector, calendarSelector, useActions, tasksSelector, modalSelector } from '@/store';
+import { IoMdAdd, IoMdClose } from 'react-icons/io';
 import { Label, LabelColor } from '@/models';
-import { Button, FieldLabel } from '@/components/UI';
+import { calendarSelector, modalSelector, tasksSelector, useActions, useAppSelector } from '@/store';
 
-import { IoMdClose, IoMdAdd } from 'react-icons/io';
-import { FiTrash, FiEdit2 } from 'react-icons/fi';
-
-import { useFieldArray, useForm, Controller } from 'react-hook-form';
+import ColorSelect from './ColorSelect/ColorSelect';
 import _ from 'lodash';
 
 export type FormData = {
@@ -57,7 +52,6 @@ const TaskModal = () => {
 	};
 	const onSubmit = handleSubmit((data) => {
 		const { title, description, labels } = data;
-		console.log({ data });
 
 		switch (mode) {
 			case 'create':
@@ -73,7 +67,6 @@ const TaskModal = () => {
 				});
 				break;
 			case 'edit':
-				console.log(selectedTask);
 				editTask({
 					id: selectedTask!.id,
 					date: selectedTask!.date,
@@ -114,7 +107,7 @@ const TaskModal = () => {
 					</Button>
 				</ModalHeader>
 				<FieldLabel>Title</FieldLabel>
-				<TextInput {...register('title', { required: true, maxLength: 10 })} maxLength={10} />
+				<TextInput {...register('title', { required: true, maxLength: 20 })} maxLength={20} />
 				{errors.title && <Error>This field is required</Error>}
 				<FieldLabel>Description</FieldLabel>
 				<TextArea {...register('description', { maxLength: 250 })} maxLength={250} />

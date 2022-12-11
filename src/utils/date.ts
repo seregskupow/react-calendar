@@ -28,3 +28,7 @@ export function getMonth(month: number = dayjs().month()): Day[][] {
 	});
 	return monthDays;
 }
+
+export function getCurrentYear(year: number, month: number): number {
+	return dayjs(new Date(year, month)).year();
+}

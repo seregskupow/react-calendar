@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import { motion } from 'framer-motion';
+
 interface DayContainerProps {
 	$overflow: boolean;
 }
@@ -134,26 +136,39 @@ export const TasksContainer = styled.ul`
 	overflow-y: auto;
 
 	overscroll-behavior: contain;
+`;
 
-	/* width */
-	&::-webkit-scrollbar {
-		width: 5px;
-	}
+export const HolidaysContainer = styled(motion.ul)`
+	position: absolute;
+	top: 5rem;
+	left: 1rem;
 
-	/* Track */
-	&::-webkit-scrollbar-track {
-		background: #f1f1f1;
-		border-radius: 5px;
-	}
+	width: calc(100% - 2rem);
+	max-height: calc(100% - 6rem);
 
-	/* Handle */
-	&::-webkit-scrollbar-thumb {
-		background: ${(props) => props.theme.colors.blue};
-		border-radius: 5px;
-	}
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 
-	/* Handle on hover */
-	&::-webkit-scrollbar-thumb:hover {
-		background: ${(props) => props.theme.colors.blue};
+	padding: 1rem;
+
+	background-color: #ffffff;
+
+	border: 1px solid ${(props) => props.theme.colors.lightGray};
+	border-radius: ${(props) => props.theme.containerBrdrR};
+
+	box-shadow: ${(props) => props.theme.shadows.sh1};
+
+	overflow: auto;
+
+	z-index: 10;
+`;
+
+export const HolidayName = styled.li`
+	font-size: 1.5rem;
+
+	&:not(:nth-last-child()) {
+		border-bottom: 1px solid ${(props) => props.theme.colors.lightGray};
+		padding-bottom: 0.5rem;
 	}
 `;
