@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import { motion } from 'framer-motion';
+
 interface DayContainerProps {
 	$overflow: boolean;
 }
@@ -136,7 +138,7 @@ export const TasksContainer = styled.ul`
 	overscroll-behavior: contain;
 `;
 
-export const HolidaysContainer = styled.ul`
+export const HolidaysContainer = styled(motion.ul)`
 	position: absolute;
 	top: 5rem;
 	left: 1rem;
@@ -154,6 +156,8 @@ export const HolidaysContainer = styled.ul`
 
 	border: 1px solid ${(props) => props.theme.colors.lightGray};
 	border-radius: ${(props) => props.theme.containerBrdrR};
+
+	box-shadow: ${(props) => props.theme.shadows.sh1};
 
 	overflow: auto;
 

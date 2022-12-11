@@ -9,6 +9,10 @@ export const MainContainer = styled.div`
 
 export const Body = styled.div`
 	display: grid;
-	grid-template-columns: 15% auto;
+	grid-template-columns: 1fr;
 	height: calc(100vh - ${(props) => props.theme.layout.headerHeight});
+
+	@media (min-width: 1100px) {
+		grid-template-columns: 15% auto;
+	}
 `;

@@ -2,13 +2,22 @@ import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
 	display: grid;
-	grid-template-columns: 1fr auto 1fr;
+	grid-template-columns: 1fr;
 	gap: 1rem;
 
-	height: ${({ theme }) => theme.layout.headerHeight};
+	height: auto;
+
+	padding: 1rem;
 
 	border-bottom: 1px solid ${(props) => props.theme.colors.blue};
 	box-shadow: ${(props) => props.theme.shadows.sh1};
+
+	@media (min-width: 1100px) {
+		grid-template-columns: 1fr auto 1fr;
+		height: ${({ theme }) => theme.layout.headerHeight};
+
+		padding: 0;
+	}
 `;
 
 export const HeaderContainerCell = styled.div`
@@ -17,12 +26,14 @@ export const HeaderContainerCell = styled.div`
 	align-items: center;
 	gap: 1rem;
 
-	&:nth-child(1) {
-		justify-content: flex-end;
-	}
+	@media (min-width: 1100px) {
+		&:nth-child(1) {
+			justify-content: flex-end;
+		}
 
-	&:nth-child(3) {
-		justify-content: flex-start;
+		&:nth-child(3) {
+			justify-content: flex-start;
+		}
 	}
 `;
 
