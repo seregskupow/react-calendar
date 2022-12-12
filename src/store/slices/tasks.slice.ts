@@ -166,6 +166,7 @@ export const tasksSlice = createSlice({
 
 		setTitleFilter: (state, action: PayloadAction<string>) => {
 			state.titleFilter = action.payload;
+			state.selectedTask = null;
 		},
 	},
 });
