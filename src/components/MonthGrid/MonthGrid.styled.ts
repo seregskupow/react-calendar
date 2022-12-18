@@ -13,17 +13,19 @@ export const MonthWrapper = styled.div`
 
 export const Grid = styled.div`
 	display: grid;
-	height: inherit;
 	grid-template-rows: repeat(5, minmax(0, 1fr));
 	grid-template-columns: repeat(7, minmax(0, 1fr));
-
-	background-color: ${(props) => props.theme.colors.lightGray};
 	grid-gap: 1px;
 
-	border: 1px solid ${(props) => props.theme.colors.lightGray};
-	border-radius: ${(props) => props.theme.containerBrdrR};
-	overflow: hidden;
-
+	height: inherit;
 	min-width: 1075px;
 	min-height: 650px;
+
+	background-color: ${(props) => props.theme.colors.lightGray};
+
+	border: 1px solid ${(props) => props.theme.colors.lightGray};
+
+	border-radius: ${(props) => props.theme.containerBrdrR};
+
+	overflow: hidden;
 `;

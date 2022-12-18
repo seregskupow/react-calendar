@@ -13,6 +13,7 @@ const DnDContext: FC<DnDContextProps> = ({ children }) => {
 	const { setTasksForDay } = useActions();
 
 	/**
+	 * On task drop handler
 	 *
 	 * @param result DropResult
 	 * Detects source and destination drop containers and moves tasks accordinly

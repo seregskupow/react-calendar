@@ -53,7 +53,7 @@ export const Button = styled.button`
 	font-size: 2rem;
 	text-decoration: none;
 
-	transition: all 0.2s ease;
+	transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
 
 	cursor: pointer;
 

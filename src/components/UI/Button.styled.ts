@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 /**
+ * Button styled component
+ *
  * Button with Text and SVG
  */
 export const Button = styled.button`
