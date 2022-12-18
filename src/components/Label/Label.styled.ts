@@ -7,6 +7,8 @@ interface LabelProps {
 	fontSize?: number;
 }
 /**
+ * Label styled component
+ *
  * @param color LabelColor
  * @param fontSize number (rem)
  */

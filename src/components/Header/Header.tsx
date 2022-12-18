@@ -35,17 +35,18 @@ const Header: FC<HeaderProps> = ({ calendarRef }) => {
 	});
 
 	const downloadCalendarScreenshot = (image: any, { name = 'img', extension = 'jpg' } = {}) => {
-		const a = document.createElement('a');
+		const a: HTMLAnchorElement = document.createElement('a');
 		a.href = image;
 		a.download = createFileName(extension, name);
 		a.click();
+		a.remove();
 	};
 
 	const downloadASJSON = () => {
 		const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(tasks));
 		const a: HTMLAnchorElement = document.createElement('a');
-		a.setAttribute('href', dataStr);
-		a.setAttribute('download', `react-calendar.json`);
+		a.href = dataStr;
+		a.download = `react-calendar.json`;
 		a.click();
 		a.remove();
 	};
@@ -91,8 +92,9 @@ const Header: FC<HeaderProps> = ({ calendarRef }) => {
 	}, [currentYear]);
 
 	//Todo: remove box shadow when taking screenshot
-	const downloadScreenshot = () =>
+	const downloadScreenshot = () => {
 		calendarRef.current && takeScreenShot(calendarRef.current).then(downloadCalendarScreenshot);
+	};
 
 	return (
 		<Fragment>

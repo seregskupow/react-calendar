@@ -131,6 +131,7 @@ export const TasksContainer = styled.ul`
 	gap: 0.5rem;
 
 	height: 100%;
+
 	padding: 0.5rem 0.5rem 1.5rem 0;
 
 	overflow-y: auto;
